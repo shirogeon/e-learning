@@ -29,7 +29,7 @@ foreach ($writableDirs as $dir) {
 
 // ── 2. Override Laravel environment paths to use /tmp ───────────────────────
 
-$_ENV['APP_STORAGE_PATH']   = '/tmp/storage';
+$_ENV['APP_STORAGE_PATH'] = '/tmp/storage';
 $_ENV['VIEW_COMPILED_PATH'] = '/tmp/storage/framework/views';
 
 // Point bootstrap cache to /tmp so artisan config:cache works
@@ -39,5 +39,4 @@ if (! defined('LARAVEL_START')) {
 
 // ── 3. Boot Laravel ─────────────────────────────────────────────────────────
 
-require $appBase . '/public/index.php';
-
+require $appBase.'/public/index.php';
