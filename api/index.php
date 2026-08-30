@@ -29,8 +29,21 @@ foreach ($writableDirs as $dir) {
 
 // ── 2. Override Laravel environment paths to use /tmp ───────────────────────
 
-$_ENV['APP_STORAGE_PATH'] = '/tmp/storage';
-$_ENV['VIEW_COMPILED_PATH'] = '/tmp/storage/framework/views';
+$cacheRedirects = [
+    'APP_STORAGE_PATH' => '/tmp/storage',
+    'VIEW_COMPILED_PATH' => '/tmp/storage/framework/views',
+    'APP_SERVICES_CACHE' => '/tmp/bootstrap/cache/services.php',
+    'APP_PACKAGES_CACHE' => '/tmp/bootstrap/cache/packages.php',
+    'APP_CONFIG_CACHE' => '/tmp/bootstrap/cache/config.php',
+    'APP_ROUTES_CACHE' => '/tmp/bootstrap/cache/routes-v7.php',
+    'APP_EVENTS_CACHE' => '/tmp/bootstrap/cache/events.php',
+];
+
+foreach ($cacheRedirects as $key => $value) {
+    putenv("{$key}={$value}");
+    $_ENV[$key] = $value;
+    $_SERVER[$key] = $value;
+}
 
 // ── 3. Boot Laravel ─────────────────────────────────────────────────────────
 
