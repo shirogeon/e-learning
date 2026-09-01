@@ -37,6 +37,7 @@ $cacheRedirects = [
     'APP_CONFIG_CACHE' => '/tmp/bootstrap/cache/config.php',
     'APP_ROUTES_CACHE' => '/tmp/bootstrap/cache/routes-v7.php',
     'APP_EVENTS_CACHE' => '/tmp/bootstrap/cache/events.php',
+    'APP_MAINTENANCE_DRIVER' => 'array',
 ];
 
 foreach ($cacheRedirects as $key => $value) {
