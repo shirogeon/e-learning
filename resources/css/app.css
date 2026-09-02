@@ -3,89 +3,137 @@
 @tailwind utilities;
 
 @layer base {
+    :root {
+        --paper: #f6f3eb;
+        --paper-deep: #ebe5d8;
+        --surface: #fffdf8;
+        --ink: #203331;
+        --muted: #68716b;
+        --line: #d8d4c9;
+        --brand: #18645b;
+        --brand-dark: #104841;
+        --signal: #b77928;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body, button, input, select, textarea { font-family: 'DM Sans', ui-sans-serif, system-ui, sans-serif; }
+
+    body { background: var(--paper); color: var(--ink); }
+
     h1, h2, h3, .font-serif-display {
-        font-family: 'Playfair Display', Georgia, serif;
+        font-family: 'DM Serif Display', Georgia, serif;
+        letter-spacing: -0.025em;
     }
-    body, html, button, input, select, textarea, .font-sans-interface {
-        font-family: 'Plus Jakarta Sans', sans-serif !important;
+
+    ::selection { background: #c8dfd8; color: var(--ink); }
+    [x-cloak] { display: none !important; }
+}
+
+@layer components {
+    .studio-shell {
+        min-height: 100vh;
+        background-color: var(--paper);
+        background-image: linear-gradient(rgba(32, 51, 49, 0.025) 1px, transparent 1px);
+        background-size: 100% 4px;
     }
-}
 
-/* Custom premium styling & animation utilities */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(16px);
+    .studio-container { width: 100%; max-width: 76rem; margin-inline: auto; padding-inline: 1.25rem; }
+    .studio-page-header { border-bottom: 1px solid var(--line); background: rgba(255, 253, 248, 0.92); }
+    .studio-page-header > div { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+    .studio-page-header h1, .studio-page-header h2 { color: var(--ink); font-size: clamp(1.55rem, 3vw, 2.1rem); line-height: 1.05; }
+
+    .studio-card { border: 1px solid var(--line); border-radius: 0.625rem; background: var(--surface); box-shadow: 0 1px 1px rgba(32, 51, 49, 0.04); }
+    .studio-inset { border: 1px solid #e2ded3; border-radius: 0.5rem; background: #f1ede4; }
+    .studio-eyebrow { color: var(--brand); font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.12em; line-height: 1.4; text-transform: uppercase; }
+
+    .studio-button, .studio-outline-button, .studio-text-button {
+        display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; border-radius: 0.5rem;
+        font-size: 0.875rem; font-weight: 700; line-height: 1.25;
+        transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    .studio-button { border: 1px solid var(--brand); background: var(--brand); color: #fffdf8; padding: 0.75rem 1rem; box-shadow: 0 2px 0 rgba(16, 72, 65, 0.16); }
+    .studio-button:hover { background: var(--brand-dark); border-color: var(--brand-dark); }
+    .studio-outline-button { border: 1px solid #aeb9b2; background: transparent; color: var(--ink); padding: 0.75rem 1rem; }
+    .studio-outline-button:hover { border-color: var(--brand); color: var(--brand-dark); background: #eff6f2; }
+    .studio-text-button { color: var(--brand); padding: 0.25rem 0; }
+    .studio-text-button:hover { color: var(--brand-dark); text-decoration: underline; text-underline-offset: 0.25rem; }
+    .studio-button:focus-visible, .studio-outline-button:focus-visible, .studio-text-button:focus-visible, .studio-field:focus-visible { outline: 3px solid #9bc7bc; outline-offset: 2px; }
+
+    .studio-field { width: 100%; border: 1px solid #bfc3b9; border-radius: 0.5rem; background: #fffdf8; color: var(--ink); font-size: 0.875rem; line-height: 1.4; padding: 0.7rem 0.8rem; transition: border-color 160ms ease, box-shadow 160ms ease; }
+    .studio-field::placeholder { color: #7d857e; }
+    .studio-field:focus { border-color: var(--brand); box-shadow: 0 0 0 3px rgba(24, 100, 91, 0.13); outline: none; }
+
+    .studio-badge { display: inline-flex; align-items: center; border: 1px solid #e0c99e; border-radius: 0.375rem; background: #fbf3e5; color: #82571a; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.08em; line-height: 1.25; padding: 0.28rem 0.45rem; text-transform: uppercase; }
+    .studio-divider { border-color: var(--line); }
+    .studio-nav { border-bottom: 1px solid var(--line); background: rgba(255, 253, 248, 0.96); }
+    .studio-nav-link { display: inline-flex; align-items: center; border-bottom: 2px solid transparent; color: #59635e; font-size: 0.875rem; font-weight: 600; height: 4.25rem; transition: color 160ms ease, border-color 160ms ease; }
+    .studio-nav-link:hover, .studio-nav-link:focus-visible { color: var(--brand-dark); }
+    .studio-nav-link.is-active { border-color: var(--brand); color: var(--brand-dark); }
+    .studio-kpi { border-left: 2px solid #cba35f; padding: 0.2rem 0 0.2rem 0.875rem; }
+    .studio-progress { height: 0.45rem; overflow: hidden; border-radius: 999px; background: #e1ddd2; }
+    .studio-progress > span { display: block; height: 100%; border-radius: inherit; background: var(--signal); }
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+@media (min-width: 640px) { .studio-container { padding-inline: 2rem; } }
+
+/* Transitional treatment for the information-dense learning workspace views. */
+.studio-dashboard,
+.studio-learning {
+    color: var(--ink);
 }
 
-@keyframes scaleUp {
-    from {
-        opacity: 0;
-        transform: scale(0.97);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+.studio-dashboard .rounded-2xl,
+.studio-learning .rounded-2xl {
+    border-radius: 0.625rem;
 }
 
-.animate-fade-in-up {
-    animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+.studio-dashboard .bg-white,
+.studio-learning .bg-white {
+    background-color: var(--surface) !important;
 }
 
-.animate-fade-in {
-    animation: fadeIn 0.4s ease-out forwards;
+.studio-dashboard .bg-slate-50,
+.studio-learning .bg-slate-50 {
+    background-color: #f1ede4 !important;
 }
 
-.animate-scale-up {
-    animation: scaleUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+.studio-dashboard .border-gray-200,
+.studio-learning .border-gray-200,
+.studio-dashboard .border-gray-150,
+.studio-learning .border-gray-150 {
+    border-color: var(--line) !important;
 }
 
-@keyframes floatSlow {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-10px) rotate(2deg); }
+.studio-dashboard .shadow-sm,
+.studio-dashboard .shadow-xl,
+.studio-learning .shadow-sm {
+    box-shadow: 0 1px 1px rgba(32, 51, 49, 0.04) !important;
 }
 
-@keyframes pulseGlow {
-    0%, 100% { opacity: 0.4; transform: scale(1); }
-    50% { opacity: 0.8; transform: scale(1.06); }
+.studio-dashboard .bg-gradient-to-r,
+.studio-dashboard .bg-gradient-to-br {
+    background: #203331 !important;
 }
 
-.animate-float-slow {
-    animation: floatSlow 6s ease-in-out infinite;
+.studio-dashboard .bg-amber-500,
+.studio-learning .bg-amber-500 {
+    background-color: var(--brand) !important;
 }
 
-.animate-pulse-glow {
-    animation: pulseGlow 3s ease-in-out infinite;
+.studio-dashboard .hover\:bg-amber-600:hover,
+.studio-learning .hover\:bg-amber-600:hover {
+    background-color: var(--brand-dark) !important;
 }
 
-.hover-lift {
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+.studio-dashboard .text-amber-500,
+.studio-dashboard .text-amber-600,
+.studio-learning .text-amber-500,
+.studio-learning .text-amber-600 {
+    color: var(--signal) !important;
 }
 
-.hover-lift:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 14px 35px -10px rgba(245, 158, 11, 0.15);
+.studio-dashboard .hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 14px rgba(32, 51, 49, 0.08) !important;
 }
-
-.glass-card {
-    background: rgba(15, 23, 42, 0.7);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.delay-75 { animation-delay: 75ms; }
-.delay-100 { animation-delay: 100ms; }
-.delay-150 { animation-delay: 150ms; }
-.delay-200 { animation-delay: 200ms; }
-.delay-300 { animation-delay: 300ms; }

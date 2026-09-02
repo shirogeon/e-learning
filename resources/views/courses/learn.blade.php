@@ -1,16 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight font-serif-display">
-                {{ $course->title }}
-            </h2>
-            <a href="{{ route('student.dashboard') }}" class="text-sm font-medium text-amber-600 dark:text-amber-400 hover:text-amber-500 transition-colors">
+            <div><p class="studio-eyebrow">Learning session</p><h2>{{ $course->title }}</h2></div>
+            <a href="{{ route('student.dashboard') }}" class="studio-text-button">
                 &larr; Back to Dashboard
             </a>
         </div>
     </x-slot>
 
-    <div class="py-6">
+    <div class="studio-learning py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <!-- Flash messages -->
             @if(session('success'))

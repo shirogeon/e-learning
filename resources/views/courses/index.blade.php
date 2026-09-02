@@ -1,20 +1,19 @@
 @if(auth()->check())
     <x-app-layout>
         <x-slot name="header">
-            <div class="flex justify-between items-center">
-                <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                    {{ __('Course Catalog') }}
-                </h2>
+            <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+                <div>
+                    <p class="studio-eyebrow">Library</p>
+                    <h2>{{ __('Course Catalog') }}</h2>
+                </div>
                 @if(auth()->user()->isStudent())
-                    <a href="{{ route('student.dashboard') }}" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md text-sm font-semibold shadow-sm transition">
-                        My Dashboard
-                    </a>
+                    <a href="{{ route('student.dashboard') }}" class="studio-outline-button">My learning desk <span aria-hidden="true">→</span></a>
                 @endif
             </div>
         </x-slot>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="py-8 sm:py-12">
+            <div class="studio-container">
                 @include('courses.partials.catalog')
             </div>
         </div>
@@ -25,195 +24,98 @@
         <head>
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
-            <title>{{ config('app.name', 'Laravel E-Learning') }}</title>
-            <!-- Fonts -->
+            <title>{{ config('app.name', 'Ruang Belajar') }}</title>
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-            <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400..700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         </head>
-        <body class="bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between">
-            <!-- Header/Navbar -->
-            <header class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-100 dark:border-slate-800 sticky top-0 z-50">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex justify-between items-center">
-                    <div class="flex items-center space-x-2">
-                        <svg class="h-6 w-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                        </svg>
-                        <a href="{{ route('home') }}" class="font-extrabold text-xl tracking-tight text-slate-900 dark:text-white">E-Learning Portal</a>
-                    </div>
-                    <div class="flex items-center space-x-4">
-                        @auth
-                            <a href="{{ route('dashboard') }}" class="text-sm font-semibold text-slate-600 dark:text-slate-350 hover:text-slate-900 dark:hover:text-white transition">Dashboard</a>
-                            <form method="POST" action="{{ route('logout') }}" class="inline">
-                                @csrf
-                                <button type="submit" class="px-4 py-2 bg-slate-100 dark:bg-slate-850 hover:bg-slate-200 dark:hover:bg-slate-750 text-slate-700 dark:text-slate-250 rounded-md text-sm font-bold transition">
-                                    Log Out
-                                </button>
-                            </form>
-                        @else
-                            <a href="{{ route('login') }}" class="text-sm font-semibold text-slate-600 dark:text-slate-350 hover:text-slate-900 dark:hover:text-white transition">Login</a>
-                            <a href="{{ route('register') }}" class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 rounded-md text-sm font-bold shadow-md shadow-amber-500/10 transition">Register</a>
-                        @endauth
-                    </div>
-                </div>
-            </header>
+        <body class="font-sans antialiased">
+            <div class="studio-shell dark:bg-slate-950">
+                @include('layouts.navigation')
 
-            <!-- Hero Section -->
-            <section class="bg-gradient-to-br from-slate-900 via-slate-950 to-neutral-950 text-white relative overflow-hidden py-20 lg:py-28 border-b border-slate-900">
-                <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:24px_24px]"></div>
-                <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-amber-500 rounded-full mix-blend-multiply filter blur-[120px] opacity-5 pointer-events-none"></div>
+                <main>
+                    <section class="border-b border-[#d8d4c9] bg-[#fffdf8] py-12 sm:py-16 lg:py-20 dark:border-slate-800 dark:bg-slate-900">
+                        <div class="studio-container grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_29rem] lg:gap-16">
+                            <div class="max-w-2xl">
+                                <p class="studio-eyebrow mb-5">Belajar dengan ritme yang masuk akal</p>
+                                <h1 class="max-w-xl text-4xl leading-[1.04] text-[#203331] sm:text-5xl lg:text-[3.65rem] dark:text-white">Bangun keahlian, satu sesi yang bermakna.</h1>
+                                <p class="mt-6 max-w-lg text-base leading-7 text-[#5b6660] sm:text-lg dark:text-slate-300">Koleksi kelas praktis dengan materi yang bisa dibaca, dikerjakan, dan dilanjutkan saat kamu siap. Tidak perlu terburu-buru untuk benar-benar paham.</p>
+                                <div class="mt-8 flex flex-wrap gap-3">
+                                    <a href="{{ route('register') }}" class="studio-button">Mulai belajar <span aria-hidden="true">→</span></a>
+                                    <a href="#catalog" class="studio-outline-button">Lihat kelas</a>
+                                </div>
+                            </div>
 
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                    <div class="max-w-3xl space-y-6">
-                        <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full text-xs font-extrabold bg-amber-500/10 text-amber-400 border border-amber-500/20 shadow-sm animate-pulse">
-                            <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
-                            <span>⚡ Next-Gen Interactive Learning Platform</span>
+                            <aside class="studio-card relative overflow-hidden p-5 sm:p-6 dark:border-slate-700 dark:bg-slate-800" aria-label="Contoh rencana belajar">
+                                <div class="absolute right-0 top-0 h-20 w-20 border-b border-l border-[#d8d4c9] bg-[#f5eddd] dark:border-slate-700 dark:bg-slate-700"></div>
+                                <div class="relative flex items-start justify-between gap-4 border-b border-[#d8d4c9] pb-5 dark:border-slate-700">
+                                    <div>
+                                        <p class="studio-eyebrow">Rencana hari ini</p>
+                                        <h2 class="mt-1 text-2xl text-[#203331] dark:text-white">Satu jam yang fokus</h2>
+                                    </div>
+                                    <span class="studio-badge">45 menit</span>
+                                </div>
+                                <ol class="relative mt-5 space-y-0">
+                                    <li class="grid grid-cols-[2rem_1fr_auto] items-center gap-3 border-b border-[#e4e0d5] py-4 dark:border-slate-700">
+                                        <span class="grid h-8 w-8 place-items-center rounded-full bg-[#dcebe5] text-xs font-bold text-[#104841]">01</span>
+                                        <div><p class="text-sm font-bold text-[#203331] dark:text-white">Baca materi inti</p><p class="mt-0.5 text-xs text-[#68716b] dark:text-slate-400">Konsep &amp; contoh</p></div>
+                                        <span class="text-xs font-semibold text-[#68716b] dark:text-slate-400">20m</span>
+                                    </li>
+                                    <li class="grid grid-cols-[2rem_1fr_auto] items-center gap-3 border-b border-[#e4e0d5] py-4 dark:border-slate-700">
+                                        <span class="grid h-8 w-8 place-items-center rounded-full border border-[#cba35f] text-xs font-bold text-[#82571a]">02</span>
+                                        <div><p class="text-sm font-bold text-[#203331] dark:text-white">Uji pemahaman</p><p class="mt-0.5 text-xs text-[#68716b] dark:text-slate-400">Kuis singkat</p></div>
+                                        <span class="text-xs font-semibold text-[#68716b] dark:text-slate-400">10m</span>
+                                    </li>
+                                    <li class="grid grid-cols-[2rem_1fr_auto] items-center gap-3 pt-4">
+                                        <span class="grid h-8 w-8 place-items-center rounded-full border border-[#d8d4c9] text-xs font-bold text-[#68716b] dark:border-slate-600 dark:text-slate-400">03</span>
+                                        <div><p class="text-sm font-bold text-[#203331] dark:text-white">Kerjakan praktik</p><p class="mt-0.5 text-xs text-[#68716b] dark:text-slate-400">Tugas mandiri</p></div>
+                                        <span class="text-xs font-semibold text-[#68716b] dark:text-slate-400">15m</span>
+                                    </li>
+                                </ol>
+                            </aside>
                         </div>
-                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight text-white font-serif-display">
-                            Unlock Your Potential with <br>
-                            <span class="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-amber-200 to-yellow-500">E-Learning Portal</span>
-                        </h1>
-                        <p class="text-lg sm:text-xl text-slate-300 leading-relaxed max-w-2xl font-medium font-sans-interface">
-                            Join a global community. Learn directly from certified developers and industry experts through guided modules, interactive quizzes, and coding assignments.
-                        </p>
-                        <div class="flex flex-wrap gap-4 pt-4">
-                            @auth
-                                <a href="{{ route('dashboard') }}" class="px-6 py-3.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold rounded-lg shadow-lg shadow-amber-500/10 text-base transition duration-200">
-                                    Go to Dashboard
-                                </a>
-                            @else
-                                <a href="{{ route('register') }}" class="px-6 py-3.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold rounded-lg shadow-lg shadow-amber-500/10 text-base transition duration-200">
-                                    Get Started Free
-                                </a>
-                            @endauth
-                            <a href="#catalog" class="px-6 py-3.5 bg-white/5 hover:bg-white/10 text-white border border-white/20 font-bold rounded-lg text-base transition duration-200">
-                                Browse Catalog
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </section>
+                    </section>
 
-            <!-- Stats Bar -->
-            <div class="bg-slate-950 border-b border-slate-900 py-6">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-                    <div>
-                        <span class="text-3xl font-black text-amber-500 dark:text-amber-400 block mb-1">100%</span>
-                        <span class="text-xs text-slate-400 uppercase font-bold tracking-widest font-sans-interface">Self-Paced Learning</span>
-                    </div>
-                    <div>
-                        <span class="text-3xl font-black text-amber-500 dark:text-amber-400 block mb-1">20+</span>
-                        <span class="text-xs text-slate-400 uppercase font-bold tracking-widest font-sans-interface">Handcrafted Lessons</span>
-                    </div>
-                    <div>
-                        <span class="text-3xl font-black text-amber-500 dark:text-amber-400 block mb-1">100%</span>
-                        <span class="text-xs text-slate-400 uppercase font-bold tracking-widest font-sans-interface">Practical Quizzes</span>
-                    </div>
-                    <div>
-                        <span class="text-3xl font-black text-amber-500 dark:text-amber-400 block mb-1">Free</span>
-                        <span class="text-xs text-slate-400 uppercase font-bold tracking-widest font-sans-interface">Certification Included</span>
-                    </div>
-                </div>
+                    <section class="border-b border-[#d8d4c9] bg-[#ede8dc] py-5 dark:border-slate-800 dark:bg-slate-900">
+                        <div class="studio-container grid gap-4 text-sm sm:grid-cols-2 lg:grid-cols-4">
+                            <div class="studio-kpi"><p class="font-bold text-[#203331] dark:text-white">Belajar mandiri</p><p class="mt-0.5 text-xs text-[#68716b] dark:text-slate-400">Lanjut saat waktumu tersedia</p></div>
+                            <div class="studio-kpi"><p class="font-bold text-[#203331] dark:text-white">Modul terstruktur</p><p class="mt-0.5 text-xs text-[#68716b] dark:text-slate-400">Materi disusun per langkah</p></div>
+                            <div class="studio-kpi"><p class="font-bold text-[#203331] dark:text-white">Kuis &amp; tugas</p><p class="mt-0.5 text-xs text-[#68716b] dark:text-slate-400">Uji pemahaman langsung di kelas</p></div>
+                            <div class="studio-kpi"><p class="font-bold text-[#203331] dark:text-white">Sertifikat selesai</p><p class="mt-0.5 text-xs text-[#68716b] dark:text-slate-400">Tersedia setelah progres tuntas</p></div>
+                        </div>
+                    </section>
+
+                    <section id="catalog" class="py-14 sm:py-20">
+                        <div class="studio-container">
+                            <div class="mb-8 max-w-2xl sm:mb-10">
+                                <p class="studio-eyebrow">Koleksi kelas</p>
+                                <h2 class="mt-3 text-3xl text-[#203331] sm:text-4xl dark:text-white">Cari materi yang ingin kamu kuasai.</h2>
+                                <p class="mt-3 text-sm leading-6 text-[#68716b] sm:text-base dark:text-slate-400">Telusuri berdasarkan topik atau pilih kategori untuk menyusun jalur belajarmu sendiri.</p>
+                            </div>
+                            @include('courses.partials.catalog')
+                        </div>
+                    </section>
+
+                    <section class="border-y border-[#d8d4c9] bg-[#fffdf8] py-14 dark:border-slate-800 dark:bg-slate-900">
+                        <div class="studio-container">
+                            <div class="flex flex-col gap-3 border-b border-[#d8d4c9] pb-7 sm:flex-row sm:items-end sm:justify-between dark:border-slate-700">
+                                <div><p class="studio-eyebrow">Cara belajar</p><h2 class="mt-2 text-3xl text-[#203331] dark:text-white">Buka kelas, atur tempo, selesaikan.</h2></div>
+                                <p class="max-w-sm text-sm leading-6 text-[#68716b] dark:text-slate-400">Sebuah alur sederhana supaya perhatianmu tertuju pada materi, bukan antarmuka.</p>
+                            </div>
+                            <ol class="mt-8 grid gap-8 md:grid-cols-3 md:gap-0">
+                                <li class="md:border-r md:border-[#d8d4c9] md:pr-8 dark:md:border-slate-700"><span class="studio-eyebrow">01 / Pilih</span><h3 class="mt-3 text-xl text-[#203331] dark:text-white">Temukan kelas yang relevan</h3><p class="mt-2 text-sm leading-6 text-[#68716b] dark:text-slate-400">Baca ringkasan, struktur materi, dan pengajarnya sebelum mulai.</p></li>
+                                <li class="md:border-r md:border-[#d8d4c9] md:px-8 dark:md:border-slate-700"><span class="studio-eyebrow">02 / Pelajari</span><h3 class="mt-3 text-xl text-[#203331] dark:text-white">Ikuti materi per modul</h3><p class="mt-2 text-sm leading-6 text-[#68716b] dark:text-slate-400">Tandai pelajaran yang selesai dan kembali ke titik terakhirmu.</p></li>
+                                <li class="md:pl-8"><span class="studio-eyebrow">03 / Buktikan</span><h3 class="mt-3 text-xl text-[#203331] dark:text-white">Kerjakan kuis dan tugas</h3><p class="mt-2 text-sm leading-6 text-[#68716b] dark:text-slate-400">Ukur pemahaman dengan praktik, lalu raih sertifikat saat rampung.</p></li>
+                            </ol>
+                        </div>
+                    </section>
+                </main>
+
+                <footer class="py-8 text-sm text-[#68716b] dark:text-slate-400">
+                    <div class="studio-container flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between"><p class="font-serif-display text-lg text-[#203331] dark:text-white">Ruang Belajar</p><p>© {{ date('Y') }} · Belajar dengan tenang, tumbuh dengan arah.</p></div>
+                </footer>
             </div>
-
-            <!-- Main Content (Catalog) -->
-            <main id="catalog" class="py-16 flex-grow">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-                    <div class="text-center space-y-2">
-                        <h2 class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">Our Courses</h2>
-                        <p class="text-slate-500 dark:text-slate-400 max-w-xl mx-auto">Explore high-quality learning content designed to build real-world capabilities.</p>
-                    </div>
-
-                    @include('courses.partials.catalog')
-                </div>
-            </main>
-
-            <!-- Features Info Section -->
-            <section class="bg-slate-100 dark:bg-slate-950 py-16 border-t border-slate-200/65 dark:border-slate-850">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="text-center mb-12">
-                        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">Designed For Lifelong Success</h2>
-                        <p class="text-slate-500 mt-2 max-w-md mx-auto">Here is how we help you master new capabilities step-by-step.</p>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/60 dark:border-slate-800 shadow-sm space-y-4">
-                            <div class="p-3 bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 w-fit rounded-xl">
-                                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                                </svg>
-                            </div>
-                            <h3 class="font-extrabold text-lg text-slate-900 dark:text-white">Interactive Syllabus</h3>
-                            <p class="text-slate-500 text-sm leading-relaxed">
-                                Our syllabus consists of structured modules, markdown lessons, embedded tutorial videos, and discussion boards for peer learning.
-                            </p>
-                        </div>
-
-                        <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/60 dark:border-slate-800 shadow-sm space-y-4">
-                            <div class="p-3 bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 w-fit rounded-xl">
-                                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                </svg>
-                            </div>
-                            <h3 class="font-extrabold text-lg text-slate-900 dark:text-white">Instant Quizzes & Tasks</h3>
-                            <p class="text-slate-500 text-sm leading-relaxed">
-                                Complete multiple-choice quizzes that grade instantly, and upload assignment submissions that get graded by your instructors.
-                            </p>
-                        </div>
-
-                        <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/60 dark:border-slate-800 shadow-sm space-y-4">
-                            <div class="p-3 bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 w-fit rounded-xl">
-                                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                                </svg>
-                            </div>
-                            <h3 class="font-extrabold text-lg text-slate-900 dark:text-white">Digital Certifications</h3>
-                            <p class="text-slate-500 text-sm leading-relaxed">
-                                Achieve 100% completion in any course to instantly generate and print a unique certificate of completion code.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Testimonials -->
-            <section class="py-16 bg-white dark:bg-slate-900">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
-                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">What Our Students Say</h2>
-                    
-                    <div class="max-w-2xl mx-auto bg-slate-50 dark:bg-slate-850 p-8 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm italic text-slate-600 dark:text-slate-350 relative">
-                        <span class="text-6xl text-indigo-200 dark:text-indigo-900 absolute -top-4 left-4 font-serif">“</span>
-                        <p class="text-base sm:text-lg relative z-10 leading-relaxed">
-                            "The platform's structured lesson player and interactive coding tasks enabled me to master Laravel 11. The printable certificate looks beautiful and is perfect for adding to my professional portfolio!"
-                        </p>
-                        <div class="mt-4 flex items-center justify-center space-x-2 text-xs">
-                            <span class="font-bold text-slate-900 dark:text-white">Sarah Jenkins</span>
-                            <span class="text-slate-400">&bull;</span>
-                            <span class="text-indigo-600 dark:text-indigo-400 font-semibold">Junior Backend Developer</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Footer -->
-            <footer class="bg-slate-900 text-slate-450 border-t border-slate-800 py-12">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-center text-center md:text-left">
-                    <div class="space-y-3">
-                        <div class="flex items-center justify-center md:justify-start space-x-2 text-white">
-                            <svg class="h-6 w-6 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                            </svg>
-                            <span class="font-extrabold text-lg tracking-tight">E-Learning Portal</span>
-                        </div>
-                        <p class="text-sm max-w-sm">Empowering developers and learners with structured, expert-led coursework.</p>
-                    </div>
-                    <div class="md:text-right text-xs space-y-1">
-                        <p>&copy; {{ date('Y') }} E-Learning Portal. All rights reserved.</p>
-                        <p class="text-slate-600">Built with Laravel 11 & Tailwind CSS.</p>
-                    </div>
-                </div>
-            </footer>
         </body>
     </html>
 @endif

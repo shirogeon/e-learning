@@ -1,11 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight font-serif-display">
-            {{ __('Administrator Dashboard') }}
-        </h2>
+        <div><p class="studio-eyebrow">Platform overview</p><h2>{{ __('Administrator Dashboard') }}</h2></div>
     </x-slot>
 
-    <div class="py-12">
+    <div class="studio-dashboard py-8 sm:py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-8">
             @if(session('success'))
                 <div class="bg-emerald-50 border border-emerald-400 text-emerald-800 dark:bg-emerald-950/60 dark:border-emerald-800 dark:text-emerald-300 px-4 py-3 rounded-xl relative shadow-sm">

@@ -1,28 +1,17 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-250 leading-tight">
-            {{ __('Student Dashboard') }}
-        </h2>
+        <div>
+            <p class="studio-eyebrow">Your workspace</p>
+            <h2>{{ __('Student Dashboard') }}</h2>
+        </div>
     </x-slot>
 
-    <div class="py-12" x-data="{ activeTab: 'courses' }">
+    <div class="studio-dashboard py-8 sm:py-12" x-data="{ activeTab: 'courses' }">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-8">
-            <!-- Welcome Banner with Ambient Glow -->
-            <div class="bg-gradient-to-r from-slate-900 via-slate-950 to-amber-950/40 text-white rounded-2xl p-8 relative overflow-hidden border border-slate-800 shadow-xl animate-fade-in-up">
-                <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
-                <div class="absolute -top-10 -right-10 w-72 h-72 bg-amber-500/20 rounded-full filter blur-3xl pointer-events-none animate-pulse-glow"></div>
-                <div class="absolute -bottom-10 right-1/3 w-64 h-64 bg-amber-600/10 rounded-full filter blur-3xl pointer-events-none animate-float-slow"></div>
-
-                <div class="relative z-10 space-y-2">
-                    <div class="inline-flex items-center space-x-2 px-3 py-1 bg-amber-500/10 border border-amber-500/20 rounded-full text-amber-400 text-xs font-bold uppercase tracking-widest backdrop-blur-sm">
-                        <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
-                        <span>Student Learning Portal</span>
-                    </div>
-                    <h1 class="text-3xl sm:text-4xl font-black tracking-tight font-serif-display text-white">Hello, {{ auth()->user()->name }}! 🎓</h1>
-                    <p class="text-slate-300 text-sm max-w-xl font-sans-interface leading-relaxed">
-                        Ready to level up your skills today? Track your ongoing courses, complete modules, and earn verified certificates.
-                    </p>
-                </div>
+            <div class="studio-card border-l-4 border-l-[#18645b] p-6 sm:p-8 dark:border-slate-700 dark:bg-slate-900">
+                <p class="studio-eyebrow">Learning desk</p>
+                <h1 class="mt-2 text-3xl text-[#203331] sm:text-4xl dark:text-white">Welcome back, {{ auth()->user()->name }}.</h1>
+                <p class="mt-3 max-w-xl text-sm leading-6 text-[#68716b] dark:text-slate-400">Continue your courses, record progress, and keep the next useful lesson in view.</p>
             </div>
 
             <!-- Stats Overview KPI Grid -->

@@ -1,19 +1,17 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight font-serif-display">
-                {{ __('Teacher Dashboard') }}
-            </h2>
-            <a href="{{ route('teacher.courses.create') }}" class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-slate-950 rounded-xl text-sm font-extrabold shadow-md shadow-amber-500/10 transition duration-200 flex items-center space-x-2">
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div><p class="studio-eyebrow">Teaching workspace</p><h2>{{ __('Teacher Dashboard') }}</h2></div>
+            <a href="{{ route('teacher.courses.create') }}" class="studio-button">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                 </svg>
-                <span>Create New Course</span>
+                <span>Create new course</span>
             </a>
         </div>
     </x-slot>
 
-    <div class="py-12">
+    <div class="studio-dashboard py-8 sm:py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-8">
             @if(session('success'))
                 <div class="bg-emerald-50 border border-emerald-400 text-emerald-800 dark:bg-emerald-950/60 dark:border-emerald-800 dark:text-emerald-300 px-4 py-3 rounded-xl relative shadow-sm">
